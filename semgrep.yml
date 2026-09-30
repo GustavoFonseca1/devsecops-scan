@@ -1,0 +1,7 @@
+rules:
+  - id: python-dangerous-eval
+    pattern: eval(...)
+    message: "Uso de eval() detectado. Evite executar código fornecido dinamicamente."
+    languages:
+      - python
+    severity: ERROR
