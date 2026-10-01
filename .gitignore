@@ -5,3 +5,4 @@ __pycache__/
 .semgrep/
 zap-report.html
 zap-output/
+zap-output/
