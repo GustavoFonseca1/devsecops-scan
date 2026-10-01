@@ -4,3 +4,4 @@ __pycache__/
 .pytest_cache/
 .semgrep/
 zap-report.html
+zap-output/

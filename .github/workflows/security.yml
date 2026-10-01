@@ -67,7 +67,7 @@ jobs:
         run: pip-audit -r requirements.txt
 
 
-  dast:
+    dast:
     name: DAST - OWASP ZAP
     runs-on: ubuntu-latest
 
@@ -91,11 +91,16 @@ jobs:
       - name: Aguardar aplicação
         run: sleep 10
 
+      - name: Preparar diretório do relatório
+        run: |
+          mkdir -p zap-output
+          chmod 777 zap-output
+
       - name: Executar OWASP ZAP
         run: |
           docker run --rm \
             --network security-net \
-            -v "${{ github.workspace }}:/zap/wrk/:rw" \
+            -v "${{ github.workspace }}/zap-output:/zap/wrk/:rw" \
             ghcr.io/zaproxy/zaproxy:stable \
             zap-baseline.py \
             -t http://devsecops-app:5000 \
@@ -106,4 +111,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: zap-report
-          path: zap-report.html
+          path: zap-output/zap-report.html
